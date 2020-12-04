@@ -1,5 +1,5 @@
 # ファイル変更イベント検出のため、watchdogをインポート
-from watchdog.events import PatternMatchingEventHandler
+from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
 # ファイルアクセスとスリープのため、osとtimeをインポート
@@ -11,11 +11,9 @@ import cv2
 
 # 監視対象ディレクトリを指定する
 target_dir = 'static/upload_images'
-# 監視対象ファイルのパターンマッチを指定する
-target_file = '*.*'
 
-# PatternMatchingEventHandler の継承クラスを作成
-class FileChangeHandler(PatternMatchingEventHandler):
+# FileSystemEventHandler の継承クラスを作成
+class FileChangeHandler(FileSystemEventHandler):
 
     # ファイル作成時のイベント
     def on_created(self, event):
@@ -41,7 +39,7 @@ class FileChangeHandler(PatternMatchingEventHandler):
 # コマンド実行の確認
 if __name__ == "__main__":
     # ファイル監視の開始
-    event_handler = FileChangeHandler([target_file])
+    event_handler = FileChangeHandler()
     observer = Observer()
     observer.schedule(event_handler, target_dir, recursive=True)
     observer.start()
