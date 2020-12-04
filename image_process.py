@@ -22,7 +22,7 @@ class FileChangeHandler(PatternMatchingEventHandler):
         filepath = event.src_path
         filename = os.path.basename(filepath)
         
-        # Hiraiwa-branch
+        # START : Hiraiwa-branch
         imagePath = 'static/upload_images/'+filename # アップロードされた画像のパスを取得
         outputPath = 'static/output_images/face_' + filename # アウトプット先のパスを指定
         cascade_path = 'cascades/haarcascade_frontalface_default.xml' # 顔を検出してくれるxmlファイルの場所を指定
@@ -38,8 +38,9 @@ class FileChangeHandler(PatternMatchingEventHandler):
                 cv2.rectangle(get_img, tuple(rect[0:2]),tuple(rect[0:2]+rect[2:4]),(255,255,255),8)
 
         cv2.imwrite(outputPath, get_img) # 出力
+        # END : Hiraiwa-branch
 
-        # ito-souma-Branch
+        # START : ito-souma-Branch
         print(filename)
         img_path = "upload_images/" + filename
         # 画像の読み込み
@@ -61,6 +62,7 @@ class FileChangeHandler(PatternMatchingEventHandler):
         edges = cv2.Canny(img, 150, 200)
         #輪郭抽出画像の保存
         cv2.imwrite(edges_outputPath, edges)
+        # END : ito-souma-Branch
 
 # コマンド実行の確認
 if __name__ == "__main__":
