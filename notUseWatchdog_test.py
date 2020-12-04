@@ -59,15 +59,17 @@ def on_created(filename):
 if __name__ == "__main__":
     # ファイル監視の開始
     # 処理が終了しないようスリープを挟んで無限ループ
-    try:
-        while True:
-            oldFilenamesSet = set(os.listdir(target_dir))
-            time.sleep(0.1)
-            newFilenamesSet = set(os.listdir(target_dir))
-            if len(newFilenamesSet) > len(oldFilenamesSet):
-                newFiles = newFilenamesSet - oldFilenamesSet
-                for f in newFiles:
-                    on_created(f)
-    except KeyboardInterrupt:
-        observer.stop()
-    observer.join()
+    while True:
+        # ディレクトリの状態を記録
+        oldFilenamesSet = set(os.listdir(target_dir))
+        # ちょっと待つ
+        time.sleep(0.1)
+        # 最新の状態も記録
+        newFilenamesSet = set(os.listdir(target_dir))
+
+        # ファイルの数が増えてたら実行
+        if len(newFilenamesSet) > len(oldFilenamesSet):
+            # 新しいファイルのみの配列生成
+            newFiles = newFilenamesSet - oldFilenamesSet
+            for f in newFiles:
+                on_created(f)
