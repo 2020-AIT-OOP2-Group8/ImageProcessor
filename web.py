@@ -32,6 +32,21 @@ def upload_file():
 
     return render_template("image_process.html")
 
+@app.route('/view_images')
+def view_images():
+    # 配列初期化
+    imagesJson = {}
+    # 画像ファイル名を取得（ディレクトリも取得するので注意）
+    filenamesList = os.listdir("./static/upload_images")
+    # FILE_TYPEで指定されている形式のみを抽出
+    filenamesList = [i for i in filenamesList if i.rsplit('.', 1)[1].lower() in FILE_TYPE]
+    # ファイル数の情報を辞書に追加
+    imagesJson["length"] = len(filenamesList)
+    # ファイル名を辞書に逐次追加
+    for index, f in enumerate(filenamesList):
+        imagesJson[str(index)] = f
+    return jsonify(imagesJson)
+
 
 if __name__ == "__main__":
     app.run()
