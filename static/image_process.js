@@ -1,11 +1,12 @@
-console.log('Fire. File.')
 fetch(`/view_images`)
     .then(response => {
-        console.log(response.status)
+        console.log(response.status)    // OK(200)//NotFound(400)
         return response.json().then(data => {
+            /*
+            ex.json == {"length":2, "0":aaa.png, "1":bbb.png}
+            */
             // htmlから対象のtableを取得
             let table = document.getElementById("view_images");
-            console.log(data)
 
             // Jsonで受け取ったlengthの回数を回す
             for (let index = 0; index < data['length']; index++) {
@@ -14,7 +15,7 @@ fetch(`/view_images`)
                 // テーブルに当該行を追加
                 let newRow = table.insertRow();
 
-                // 以下画像表示
+                /* 以下画像表示 */
                 // 元画像
                 let newCell = newRow.insertCell();
                 let newImage = document.createElement('img');
