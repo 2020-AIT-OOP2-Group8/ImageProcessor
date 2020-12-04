@@ -10,7 +10,8 @@ import time
 import cv2
 
 # 監視対象ディレクトリを指定する
-target_dir = 'static/upload_images'
+target_dir = 'static/upload_images/'
+output_dir = 'static/output_images/'
 # 監視対象ファイルのパターンマッチを指定する
 target_file = '*.*'
 
@@ -23,8 +24,8 @@ class FileChangeHandler(PatternMatchingEventHandler):
         filename = os.path.basename(filepath)
         
         # START : Hiraiwa-branch
-        imagePath = 'static/upload_images/'+filename # アップロードされた画像のパスを取得
-        outputPath = 'static/output_images/face_' + filename # アウトプット先のパスを指定
+        imagePath = target_dir + filename # アップロードされた画像のパスを取得
+        outputPath = output_dir + 'face_' + filename # アウトプット先のパスを指定
         cascade_path = 'cascades/haarcascade_frontalface_default.xml' # 顔を検出してくれるxmlファイルの場所を指定
         
         get_img = cv2.imread(imagePath) # アップロードされた画像を取得
@@ -42,22 +43,21 @@ class FileChangeHandler(PatternMatchingEventHandler):
 
         # START : ito-souma-Branch
         print(filename)
-        img_path = "upload_images/" + filename
         # 画像の読み込み
-        img = cv2.imread(img_path)
-        gray_outputPath = "output_images/gray_" + filename 
+        img = cv2.imread(imagePath)
+        gray_outputPath = output_dir + "gray_" + filename 
         #グレースケール化
         img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # RGB2〜 でなく BGR2〜 を指定
         #グレースケール画像の保存
         cv2.imwrite(gray_outputPath, img_gray)
 
-        thresh_outputPath = "output_images/thresh_" + filename 
+        thresh_outputPath = output_dir + "thresh_" + filename 
         th, img_thresh = cv2.threshold(img, 188, 255, cv2.THRESH_BINARY)
         # 二値化画像の保存
         cv2.imwrite(thresh_outputPath, img_thresh)
         cv2.destroyAllWindows()
 
-        edges_outputPath = "output_images/edges_" + filename 
+        edges_outputPath = output_dir + "edges_" + filename 
         #Cannyフィルタによる輪郭抽出
         edges = cv2.Canny(img, 150, 200)
         #輪郭抽出画像の保存
