@@ -25,31 +25,31 @@ fetch(`/view_images`)
                 // モザイク
                 newCell = newRow.insertCell();
                 newImage = document.createElement('img');
-                newImage.src = './static/output_images/face_' + imgFilename;
+                newImage.src = './static/mosaic_output_images/mosaic_' + imgFilename;
                 newImage.style.width = '90%';
                 newCell.appendChild(newImage);
                 // 枠で囲う
                 newCell = newRow.insertCell();
                 newImage = document.createElement('img');
-                newImage.src = './static/output_images/face2_' + imgFilename;
+                newImage.src = './static/face_output_images/face_' + imgFilename;
                 newImage.style.width = '90%';
                 newCell.appendChild(newImage);
                 // 輪郭抽出
                 newCell = newRow.insertCell();
                 newImage = document.createElement('img');
-                newImage.src = './static/output_images/edges_' + imgFilename;
+                newImage.src = './static/edges_output_images/edges_' + imgFilename;
                 newImage.style.width = '90%';
                 newCell.appendChild(newImage);
                 // グレースケール
                 newCell = newRow.insertCell();
                 newImage = document.createElement('img');
-                newImage.src = './static/output_images/gray_' + imgFilename;
+                newImage.src = './static/gray_output_images/gray_' + imgFilename;
                 newImage.style.width = '90%';
                 newCell.appendChild(newImage);
                 // 2値化
                 newCell = newRow.insertCell();
                 newImage = document.createElement('img');
-                newImage.src = './static/output_images/thresh_' + imgFilename;
+                newImage.src = './static/thresh_output_images/thresh_' + imgFilename;
                 newImage.style.width = '90%';
                 newCell.appendChild(newImage);
             }
