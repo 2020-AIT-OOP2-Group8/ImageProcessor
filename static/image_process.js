@@ -22,16 +22,16 @@ fetch(`/view_images`)
                 newImage.src = './static/upload_images/' + imgFilename;
                 newImage.style.width = '90%';
                 newCell.appendChild(newImage);
-                // モザイク
-                newCell = newRow.insertCell();
-                newImage = document.createElement('img');
-                newImage.src = './static/mosaic_output_images/mosaic_' + imgFilename;
-                newImage.style.width = '90%';
-                newCell.appendChild(newImage);
                 // 枠で囲う
                 newCell = newRow.insertCell();
                 newImage = document.createElement('img');
                 newImage.src = './static/face_output_images/face_' + imgFilename;
+                newImage.style.width = '90%';
+                newCell.appendChild(newImage);
+                // モザイク
+                newCell = newRow.insertCell();
+                newImage = document.createElement('img');
+                newImage.src = './static/mosaic_output_images/mosaic_' + imgFilename;
                 newImage.style.width = '90%';
                 newCell.appendChild(newImage);
                 // 輪郭抽出
