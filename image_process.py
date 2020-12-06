@@ -25,23 +25,48 @@ class FileChangeHandler(PatternMatchingEventHandler):
         img_path = "upload_images/" + filename
         # 画像の読み込み
         img = cv2.imread(img_path)
-        gray_outputPath = "output_images/gray_" + filename 
+        gray_output_images = "output_images/gray_" + filename 
         #グレースケール化
         img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # RGB2〜 でなく BGR2〜 を指定
         #グレースケール画像の保存
-        cv2.imwrite(gray_outputPath, img_gray)
+        cv2.imwrite(gray_output_images, img_gray)
 
-        thresh_outputPath = "output_images/thresh_" + filename 
+        thresh_output_images = "output_images/thresh_" + filename 
         th, img_thresh = cv2.threshold(img, 188, 255, cv2.THRESH_BINARY)
         # 二値化画像の保存
-        cv2.imwrite(thresh_outputPath, img_thresh)
+        cv2.imwrite(thresh_output_images, img_thresh)
         cv2.destroyAllWindows()
 
-        edges_outputPath = "output_images/edges_" + filename 
+        edges_output_images = "output_images/edges_" + filename 
         #Cannyフィルタによる輪郭抽出
         edges = cv2.Canny(img, 150, 200)
         #輪郭抽出画像の保存
-        cv2.imwrite(edges_outputPath, edges)
+        cv2.imwrite(edges_output_images, edges)
+
+    def on_modified(self, evebt):
+        filepath = event.src_path
+        filename = os.path.basename(filepath)
+        print(filename)
+        img_path = "upload_images/" + filename
+        # 画像の読み込み
+        img = cv2.imread(img_path)
+        gray_output_images = "output_images/gray_" + filename 
+        #グレースケール化
+        img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # RGB2〜 でなく BGR2〜 を指定
+        #グレースケール画像の保存
+        cv2.imwrite(gray_output_images, img_gray)
+
+        thresh_output_images = "output_images/thresh_" + filename 
+        th, img_thresh = cv2.threshold(img, 188, 255, cv2.THRESH_BINARY)
+        # 二値化画像の保存
+        cv2.imwrite(thresh_output_images, img_thresh)
+        cv2.destroyAllWindows()
+
+        edges_output_images = "output_images/edges_" + filename 
+        #Cannyフィルタによる輪郭抽出
+        edges = cv2.Canny(img, 150, 200)
+        #輪郭抽出画像の保存
+        cv2.imwrite(edges_output_images, edges)
 
 # コマンド実行の確認
 if __name__ == "__main__":
