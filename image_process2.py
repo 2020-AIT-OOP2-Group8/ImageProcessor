@@ -53,17 +53,17 @@ def makeImage(filename):
 class FileChangeHandler(FileSystemEventHandler):
 
     def on_created(self, event):
-        print(f'on_created:')
         filepath = event.src_path
         filename = os.path.basename(filepath)
-        makeImage(filename)
+        if(filename != 'upload_images' and filename != '.DS_Store'):
+            makeImage(filename)
 
     # ファイル変更時のイベント
     def on_modified(self, event):
-        print(f'on_modified:')
         filepath = event.src_path
         filename = os.path.basename(filepath)
-        makeImage(filename)
+        if(filename != 'upload_images' and filename != '.DS_Store'):
+            makeImage(filename)
 
 # コマンド実行の確認
 if __name__ == "__main__":
