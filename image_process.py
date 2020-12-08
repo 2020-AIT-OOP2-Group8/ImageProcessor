@@ -56,7 +56,7 @@ class FileChangeHandler(PatternMatchingEventHandler):
         #グレースケール画像の保存
         cv2.imwrite(gray_output_images, img_gray)
 
-        thresh_output_images = "static/thresh/output_images/thresh_" + filename 
+        thresh_output_images = "static/thresh_output_images/thresh_" + filename 
         th, img_thresh = cv2.threshold(img, 188, 255, cv2.THRESH_BINARY)
         # 二値化画像の保存
         cv2.imwrite(thresh_output_images, img_thresh)
